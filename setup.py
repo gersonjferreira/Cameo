@@ -24,4 +24,9 @@ setup(
         'PyQT5',
         'opencv-python',
     ],
+    entry_points={
+        'console_scripts': [
+            'cameo=cameo.cameo:main',
+        ],
+    },
 )

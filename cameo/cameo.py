@@ -6,14 +6,16 @@ import PyQt5.QtWidgets as QtW
 import sys
 import cv2
 
+from .parameters import *
+
 class MainWindow(QtW.QWidget):
     # constructor
     def __init__(self, parent=None):
         super().__init__(parent)
-        
+
         # default size
-        self.size = 200 # pixels
-        self.zoom = 0 # zoom factor to crop webcam image
+        self.size = radius # pixels
+        self.zoom = zoom # zoom factor to crop webcam image
         
         # define window size and title
         self.resize(self.size, self.size)
@@ -25,18 +27,18 @@ class MainWindow(QtW.QWidget):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         # make window always on top
         self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
-                
+        
         # draw a label in the middle of the window
         self.label = QtW.QLabel(self)
         self.label.resize(self.size, self.size)
         
         # init webcam
-        self.cap = cv2.VideoCapture(2)
+        self.cap = cv2.VideoCapture(webcam)
         
         # timer to update window
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.updateFrame)
-        self.timer.start(30)
+        self.timer.start(interval)
         
         # store position
         self.oldPos = self.pos()
@@ -119,8 +121,31 @@ class MainWindow(QtW.QWidget):
             # center label
             self.label.setAlignment(QtCore.Qt.AlignCenter)
 
-if __name__ == '__main__':
+def main():
+    global webcam
+    # capture input arguments
+    args = sys.argv[1:]
+    
+    # check if --help
+    if "--help" in args:
+        print("Usage: cameo [options]")
+        print("Options:")
+        print("  --help       Display this information")
+        print("  --webcam     Set webcam index (default 0), usually even numbers only: 0, 2, 4...")
+        sys.exit(0)
+    
+    # check if --webcam
+    if "--webcam" in args:
+        # get webcam index
+        webcam = args[args.index("--webcam") + 1]
+        webcam = int(webcam)
+        
+
+    # create and run application
     app = QtW.QApplication(sys.argv)
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()
