@@ -2,8 +2,6 @@
 
 Display webcam as circular overlay on top of other windows. Radius and zoom can be controlled with the mouse.
 
-<img src="cameo_hires.png" alt="Cameo Icon" width="100"/>
-
 ## Install
 
 Here I assume you are using conda or miniconda. To install the latest version directly from the github repository:
