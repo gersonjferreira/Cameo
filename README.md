@@ -1,6 +1,8 @@
 # Cameo
 
-Display webcam as circular overlay on top of other windows. Radius and zoom can be controlled with the mouse.
+Display webcam as circular overlay on top of other windows. Radius and zoom can be controlled with the mouse. Check the youtube video to see it working.
+
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/B5YFOsQF_Pg)
 
 ## Install
 
