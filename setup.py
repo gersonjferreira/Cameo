@@ -9,6 +9,23 @@ def read_version():
             if line.startswith('__version__'):
                 return line.split('=')[1].strip().strip("'")
 
+# function to create desktop file with proper icon path
+def create_desktop_file():
+    desktop_entry = """[Desktop Entry]
+Name=Cameo
+Comment=Display webcam as circular overlay on top of other windows
+Exec=cameo --webcam 0
+Icon={icon_path}
+Terminal=false
+Type=Application
+Categories=Utility;
+"""
+    with open('cameo.desktop', 'w') as f:
+        f.write(desktop_entry.format(icon_path=os.path.expanduser('~/.local/share/icons/cameo.png')))
+
+# setup precedure
+create_desktop_file()
+
 setup(
     name='Cameo',
     version=read_version(),
@@ -29,4 +46,8 @@ setup(
             'cameo=cameo.cameo:main',
         ],
     },
+    data_files=[
+        ('share/applications', ['cameo.desktop']),
+        ('share/icons', ['cameo.png']),
+    ],
 )
