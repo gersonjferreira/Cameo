@@ -14,7 +14,7 @@ def create_desktop_file():
     desktop_entry = """[Desktop Entry]
 Name=Cameo
 Comment=Display webcam as circular overlay on top of other windows
-Exec=cameo --webcam 0
+Exec="cameo --webcam 0"
 Icon={icon_path}
 Terminal=false
 Type=Application
